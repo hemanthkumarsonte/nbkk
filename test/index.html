@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Results Portal</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f7fa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    #resultTable {
+      width: 100%;
+      margin-top: 20px;
+      display: none;
+    }
+    #resultTable th, #resultTable td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    #resultTable th {
+      background-color: #007bff;
+      color: white;
+    }
+    #errorMessage {
+      color: red;
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Results Portal</h1>
+    <form id="searchForm" onsubmit="handleFormSubmit(event)">
+      <div class="form-group">
+        <input type="text" id="studentId" class="form-control" placeholder="Enter Your Student ID" required>
+      </div>
+      <button type="submit" class="btn btn-primary">View Results</button>
+    </form>
+    <table id="resultTable">
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Math</th>
+          <th>Science</th>
+          <th>English</th>
+          <th>Attendance</th>
+        </tr>
+      </thead>
+      <tbody id="resultBody"></tbody>
+    </table>
+    <div id="errorMessage">Student ID not found. Please try again.</div>
+  </div>
+
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const studentId = document.getElementById('studentId').value;
+      google.script.run.withSuccessHandler(displayResults).getStudentData(studentId);
+    }
+
+    function displayResults(data) {
+      const resultTable = document.getElementById('resultTable');
+      const resultBody = document.getElementById('resultBody');
+      const errorMessage = document.getElementById('errorMessage');
+      
+      resultBody.innerHTML = '';
+      errorMessage.style.display = 'none';
+      
+      if (data && data.length > 0) {
+        const row = document.createElement('tr');
+        data.forEach(cell => {
+          const td = document.createElement('td');
+          td.textContent = cell;
+          row.appendChild(td);
+        });
+        resultBody.appendChild(row);
+        resultTable.style.display = 'table';
+      } else {
+        resultTable.style.display = 'none';
+        errorMessage.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
