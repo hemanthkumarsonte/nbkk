@@ -10,14 +10,15 @@
   --background: #f5f5f5;
   --surface: #ffffff;
   --border: #e0e0e0;
+  --container-padding: clamp(1rem, 5vw, 2rem);
+  --header-height: clamp(60px, 10vh, 100px);
 }
 
 /* Base Styles */
 * {
-  box-sizing: content-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-
 }
 
 body {
@@ -69,7 +70,7 @@ img {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 var(--container-padding);
 }
 
 /* Header Styles */
@@ -240,8 +241,6 @@ img {
 
 .section {
   margin: 3rem 0;
-
-
 }
 
 .section-title {
@@ -252,36 +251,84 @@ img {
   padding-bottom: 0.5rem;
 }
 
-/*.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 2px height;
-  4px;
-  background-color, var:(--primary)
-}*/
-
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .school-title {
-    font-size: 1.5rem;
+  .header {
+    padding: 0.5rem;
   }
 
-  .logo {
-    width: 50px;
-    height: 50px;
+  .logo-container {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .school-title {
+    font-size: clamp(1.2rem, 4vw, 2rem);
   }
 
   .nav-container {
     flex-direction: column;
-    align-items: stretch;
+    padding: 1rem;
   }
 
   .nav-link {
+    width: 100%;
     text-align: center;
+    padding: 0.75rem;
   }
 
+  input, 
+  textarea {
+    width: 100%;
+  }
+
+  .locations-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .section {
+    padding: 2rem var(--container-padding);
+  }
+
+  .container .card {
+    width: 100%;
+    max-width: 330px;
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .school-title {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .breadcrumb-list {
+    padding: 0 1rem;
+  }
+
+  .master-quote {
+    padding: 1rem;
+  }
+
+  .master-img {
+    width: 96px;
+    height: 96px;
+  }
 }
 
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic)*
@@ -384,17 +431,12 @@ img {
   border-radius: 30px;
   color: #af1313;
   margin: 3rem;
-
-
 }
 
 p {
   margin-bottom: 20px;
   /* Adjust the value to your preference */
 }
-
-
-
 
 .master-quote {
   margin-top: 4rem;
@@ -418,7 +460,6 @@ p {
   color: #4a5568;
   margin-bottom: 1rem;
   font-size: 1.25rem;
-
 }
 
 {
