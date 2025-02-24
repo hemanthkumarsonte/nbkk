@@ -415,7 +415,7 @@ img {
 
 .section {
   width: autopx;
-  padding: 120px;
+  padding: 40px;
   background-image: url('cls.jpg');
   background-size: cover;
   background-position: center;
@@ -483,7 +483,7 @@ textarea{
 	background-color: var(--primary);
 	color: white;
 	width: 200px;
-  height: 25px;
+  height: 35px;
 	margin-top: 15px;
 	border-radius: 150px;
 
